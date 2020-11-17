@@ -2,6 +2,8 @@ import React from "react";
 import Header from "./components/Header";
 import { newsCategory } from "./news";
 import NewsList from "./components/NewsList";
+import Pagination from "./components/Pagination";
+import ResultFound from "./components/ResultFound";
 
 const fakeNews = [
   {
@@ -33,7 +35,9 @@ class App extends React.Component {
         <div className="row">
           <div className="col-sm-6 offset-md-3">
             <Header category={newsCategory.technology} />
+            <ResultFound />
             <NewsList news={fakeNews} />
+            <Pagination />
           </div>
         </div>
       </div>
