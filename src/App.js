@@ -4,6 +4,7 @@ import { newsCategory } from "./news";
 import NewsList from "./components/NewsList";
 import Pagination from "./components/Pagination";
 import ResultFound from "./components/ResultFound";
+import Loading from "./components/Loading";
 
 const fakeNews = [
   {
@@ -38,6 +39,7 @@ class App extends React.Component {
             <ResultFound />
             <NewsList news={fakeNews} />
             <Pagination />
+            <Loading />
           </div>
         </div>
       </div>
