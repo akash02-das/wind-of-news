@@ -1,0 +1,56 @@
+import React from "react";
+import { newsCategory } from "../news";
+
+class Header extends React.Component {
+  state = {
+    searchTerm: "",
+  };
+
+  handleChange = (e) => {
+    this.setState({ searchTerm: e.target.value });
+  };
+
+  handleKeyPress = (e) => {};
+
+  render() {
+    const { category } = this.props;
+    return (
+      <div className="my-4">
+        <h1
+          className="mb-4 text-center text-dark"
+          style={{ fontWeight: "300" }}
+        >
+          Wind Of News
+        </h1>
+        <input
+          type="search"
+          className="form-control"
+          placeholder="Type Anything & Press Enter To Search"
+          value={this.state.searchTerm}
+          onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
+        />
+        <div className="my-4">
+          {newsCategory &&
+            Object.keys(newsCategory).map((item) => {
+              if (category === newsCategory[item]) {
+                return (
+                  <button className="btn btn-sm btn-info mr-2 mb-2">
+                    {`#${newsCategory[item]}`}
+                  </button>
+                );
+              } else {
+                return (
+                  <button className="btn btn-sm btn-light mr-2 mb-2">
+                    {`#${newsCategory[item]}`}
+                  </button>
+                );
+              }
+            })}
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Header;
