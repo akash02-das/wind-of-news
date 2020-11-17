@@ -1,6 +1,8 @@
 import React from "react";
-import Header from "./components/Header";
+import axios from "axios";
 import { newsCategory } from "./news";
+
+import Header from "./components/Header";
 import NewsList from "./components/NewsList";
 import Pagination from "./components/Pagination";
 import ResultFound from "./components/ResultFound";

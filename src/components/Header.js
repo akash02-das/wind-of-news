@@ -1,4 +1,6 @@
 import React from "react";
+import moment from "moment";
+import "../App.css";
 import { newsCategory } from "../news";
 
 class Header extends React.Component {
@@ -14,14 +16,21 @@ class Header extends React.Component {
 
   render() {
     const { category } = this.props;
+
+    // Current Date
+    const m = moment();
+    const date = m.format("dddd, MMMM D, YYYY");
+
     return (
-      <div className="my-4">
-        <h1
-          className="mb-4 text-center text-dark"
-          style={{ fontWeight: "300" }}
-        >
-          Wind Of News
-        </h1>
+      <div className="my-2">
+        <div className="mb-4 p-2 bg-info">
+          <h1 className="text-center text-light header-title">
+            The Wind Of News
+          </h1>
+          <p className="text-center">
+            {date} | <span className="text-dark ">YOUR RIGHT TO KNOW</span>
+          </p>
+        </div>
         <input
           type="search"
           className="form-control"
