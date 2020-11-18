@@ -15,7 +15,7 @@ class Header extends React.Component {
   handleKeyPress = (e) => {};
 
   render() {
-    const { category } = this.props;
+    const { category, changeCategory } = this.props;
 
     // Current Date
     const m = moment();
@@ -44,13 +44,13 @@ class Header extends React.Component {
             Object.keys(newsCategory).map((item) => {
               if (category === newsCategory[item]) {
                 return (
-                  <button className="btn btn-sm btn-info mr-2 mb-2">
+                  <button onClick={() => changeCategory(newsCategory[item])} className="btn btn-sm btn-info mr-2 mb-2">
                     {`#${newsCategory[item]}`}
                   </button>
                 );
               } else {
                 return (
-                  <button className="btn btn-sm btn-light mr-2 mb-2">
+                  <button onClick={() => changeCategory(newsCategory[item])} className="btn btn-sm btn-light mr-2 mb-2">
                     {`#${newsCategory[item]}`}
                   </button>
                 );
