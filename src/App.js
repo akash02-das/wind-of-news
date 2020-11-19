@@ -62,6 +62,29 @@ class App extends React.Component {
       });
   };
 
+  handlePageChange = (value) => {
+    this.setState({
+      data: {
+        ...this.state.data,
+        currentPage: Number.parseInt(value),
+      },
+    });
+  };
+
+  gotoPage = () => {
+    this.setState({ isLoading: true });
+    news
+      .setCurrentPage(this.state.data.currentPage)
+      .then((data) => {
+        this.setState({ data, isLoading: false });
+      })
+      .catch((e) => {
+        console.log(e);
+        alert("Something went wrong");
+        this.setState({ isLoading: false });
+      });
+  };
+
   render() {
     const {
       article,
@@ -93,6 +116,8 @@ class App extends React.Component {
                   isPrev={isPrev}
                   totalPage={totalPage}
                   currentPage={currentPage}
+                  handlePageChange={this.handlePageChange}
+                  gotoPage={this.gotoPage}
                 />
               </div>
             )}
