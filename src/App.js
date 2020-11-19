@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { newsCategory } from "./news";
+import News, { newsCategory } from "./news";
 
 import Header from "./components/Header";
 import NewsList from "./components/NewsList";
@@ -19,29 +19,34 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    const url = `${process.env.REACT_APP_NEWS_URL}?apiKey=${process.env.REACT_APP_NEWS_API_KEY}&category=${this.state.category}`;
-    axios
-      .get(url)
-      .then((response) => {
-        this.setState({
-          news: response.data.articles,
-        });
-      })
-      .catch((e) => console.log(e));
+    // const url = `${process.env.REACT_APP_NEWS_URL}?apiKey=${process.env.REACT_APP_NEWS_API_KEY}&category=${this.state.category}`;
+    // axios
+    //   .get(url)
+    //   .then((response) => {
+    //     this.setState({
+    //       news: response.data.articles,
+    //     });
+    //   })
+    //   .catch((e) => console.log(e));
+
+    const news = new News(newsCategory.technology);
+    news.getNews().then(data => {
+      console.log(data);
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.category !== this.state.category) {
-      const url = `${process.env.REACT_APP_NEWS_URL}?apiKey=${process.env.REACT_APP_NEWS_API_KEY}&category=${this.state.category}`;
-      axios
-        .get(url)
-        .then((response) => {
-          this.setState({
-            news: response.data.articles,
-          });
-        })
-        .catch((e) => console.log(e));
-    }
+    // if (prevState.category !== this.state.category) {
+    //   const url = `${process.env.REACT_APP_NEWS_URL}?apiKey=${process.env.REACT_APP_NEWS_API_KEY}&category=${this.state.category}`;
+    //   axios
+    //     .get(url)
+    //     .then((response) => {
+    //       this.setState({
+    //         news: response.data.articles,
+    //       });
+    //     })
+    //     .catch((e) => console.log(e));
+    // }
   }
 
   render() {
