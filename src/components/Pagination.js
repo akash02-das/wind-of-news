@@ -6,9 +6,12 @@ export class Pagination extends React.Component {
   };
 
   render() {
+    const {next, prev, isNext, isPrev, currentPage, totalPage} = this.props
     return (
       <div className="d-flex align-items-center my-5">
-        <button className="btn btn-info">Prev</button>
+        <button className="btn btn-info" disabled={!isPrev} onClick={() => {
+          prev();
+        }} >Prev</button>
         <div className="flex-grow-1 text-center">
           {this.state.isEditable ? (
             <input type="number" value="1" />
@@ -26,7 +29,9 @@ export class Pagination extends React.Component {
             </p>
           )}
         </div>
-        <button className="btn btn-info">Next</button>
+        <button className="btn btn-info" disabled={!isNext} onClick={() => {
+          next();
+        }} >Next</button>
       </div>
     );
   }

@@ -12,22 +12,66 @@ const news = new News(newsCategory.technology);
 class App extends React.Component {
   state = {
     data: {},
-    isLoading: true
+    isLoading: true,
   };
 
   componentDidMount() {
-    news.getNews()
-      .then(data => {
-        this.setState({data, isLoading: false})
+    news
+      .getNews()
+      .then((data) => {
+        this.setState({ data, isLoading: false });
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
         alert("Something went wrong");
-        this.setState({isLoading: false})
-      })
+        this.setState({ isLoading: false });
+      });
   }
 
+  next = () => {
+    if (this.state.data.isNext) {
+      this.setState({ isLoading: true });
+    }
+
+    news
+      .next()
+      .then((data) => {
+        this.setState({ data, isLoading: false });
+      })
+      .catch((e) => {
+        console.log(e);
+        alert("Something went wrong");
+        this.setState({ isLoading: false });
+      });
+  };
+
+  prev = () => {
+    if (this.state.data.isPrev) {
+      this.setState({ isLoading: true });
+    }
+
+    news
+      .prev()
+      .then((data) => {
+        this.setState({ data, isLoading: false });
+      })
+      .catch((e) => {
+        console.log(e);
+        alert("Something went wrong");
+        this.setState({ isLoading: false });
+      });
+  };
+
   render() {
+    const {
+      article,
+      isNext,
+      isPrev,
+      category,
+      totalPage,
+      currentPage,
+      totalResults,
+    } = this.state.data;
     return (
       <div className="container">
         <div className="row">
@@ -40,9 +84,18 @@ class App extends React.Component {
             {this.state.isLoading ? (
               <Loading />
             ) : (
-              <NewsList news={this.state.data.article} />
+              <div>
+                <NewsList news={this.state.data.article} />
+                <Pagination
+                  next={this.next}
+                  prev={this.prev}
+                  isNext={isNext}
+                  isPrev={isPrev}
+                  totalPage={totalPage}
+                  currentPage={currentPage}
+                />
+              </div>
             )}
-            <Pagination />
           </div>
         </div>
       </div>
