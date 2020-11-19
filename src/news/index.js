@@ -37,9 +37,21 @@ export default class news {
         }
     }
 
-    prev() {}
+    next() {
+        if(this._isNext()) {
+            this._currentPage++;
+            return this.getNews();
+        }
+        return false;
+    }
 
-    next() {}
+    prev() {
+        if(this._isPrev()) {
+            this._currentPage--;
+            return this.getNews();
+        } 
+        return false;
+    }
 
     setCurrentPage() {}
 
@@ -56,5 +68,13 @@ export default class news {
         if(this._currentPage) url += `&page=${this._currentPage}`;
 
         return url;
+    }
+
+    _isNext() {
+        return this._currentPage < this._totalPage;
+    }
+
+    _isPrev() {
+        return this._currentPage > 1;
     }
 }
