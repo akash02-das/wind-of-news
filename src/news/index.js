@@ -53,11 +53,24 @@ export default class news {
         return false;
     }
 
-    setCurrentPage() {}
+    setCurrentPage(pageNumber) {
+        if(pageNumber < 1 && pageNumber > this._totalPage) {
+            throw new Error("Invalid Page Number")
+        }
+        this._currentPage = pageNumber;
+        return this.getNews();
+    }
 
-    changeCategory() {}
+    changeCategory(category) {
+        this._category = category;
+        this._currentPage = 1;
+        return this.getNews();
+    }
 
-    search() {}
+    search(term) {
+        this._searchTerm = term;
+        return this.getNews();
+    }
 
     _getUrl() {
         let url = '/?';
