@@ -85,6 +85,20 @@ class App extends React.Component {
       });
   };
 
+  changeCategory = category => {
+    this.setState({isLoading: true});
+    news.changeCategory(category)
+    .then((data) => {
+      this.setState({ data, isLoading: false });
+    })
+    .catch((e) => {
+      console.log(e);
+      alert("Something went wrong");
+      this.setState({ isLoading: false });
+    });
+      
+  }
+
   render() {
     const {
       article,
@@ -100,15 +114,19 @@ class App extends React.Component {
         <div className="row">
           <div className="col-sm-6 offset-md-3">
             <Header
-              category={this.state.category}
+              category={category}
               changeCategory={this.changeCategory}
             />
-            <ResultFound />
+            <ResultFound 
+              results={totalResults} 
+              currentPage={currentPage} 
+              totalPage={totalPage} 
+            />
             {this.state.isLoading ? (
               <Loading />
             ) : (
               <div>
-                <NewsList news={this.state.data.article} />
+                <NewsList news={article} />
                 <Pagination
                   next={this.next}
                   prev={this.prev}

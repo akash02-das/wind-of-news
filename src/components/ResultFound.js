@@ -1,11 +1,11 @@
 import React from "react";
 
-function ResultFound() {
+function ResultFound({results, currentPage, totalPage}) {
   return (
     <div className="d-flex">
-      <p className="text-black-50">About {0} results found</p>
+      <p className="text-black-50">About {results} results found</p>
       <p className="text-black-50 ml-auto">
-        {1} page of {100}
+        {currentPage} page of {totalPage}
       </p>
     </div>
   );
