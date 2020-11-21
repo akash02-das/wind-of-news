@@ -96,7 +96,19 @@ class App extends React.Component {
       alert("Something went wrong");
       this.setState({ isLoading: false });
     });
-      
+  }
+
+  search = searchTerm => {
+    this.setState({isLoading: true});
+    news.search(searchTerm)
+    .then((data) => {
+      this.setState({ data, isLoading: false });
+    })
+    .catch((e) => {
+      console.log(e);
+      alert("Something went wrong");
+      this.setState({ isLoading: false });
+    });
   }
 
   render() {
@@ -116,6 +128,7 @@ class App extends React.Component {
             <Header
               category={category}
               changeCategory={this.changeCategory}
+              search={this.search}
             />
             <ResultFound 
               results={totalResults} 
