@@ -138,13 +138,12 @@ class App extends React.Component {
               changeCategory={this.changeCategory}
               search={this.search}
             />
-            <div ref={this.foundResult}>
-              <ResultFound
-                results={totalResults}
-                currentPage={currentPage}
-                totalPage={totalPage}
-              />
-            </div>
+            <ResultFound
+              ref={this.foundResult}
+              results={totalResults}
+              currentPage={currentPage}
+              totalPage={totalPage}
+            />
             {this.state.isLoading ? (
               <Loading />
             ) : (
