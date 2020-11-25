@@ -15,6 +15,8 @@ class App extends React.Component {
     isLoading: true,
   };
 
+  foundResult = React.createRef();
+
   componentDidMount() {
     news
       .getNews()
@@ -27,6 +29,10 @@ class App extends React.Component {
         this.setState({ isLoading: false });
       });
   }
+
+  goToTop = () => {
+    window.scroll(0, this.foundResult.current.scrollTop);
+  };
 
   next = () => {
     if (this.state.data.isNext) {
@@ -132,11 +138,13 @@ class App extends React.Component {
               changeCategory={this.changeCategory}
               search={this.search}
             />
-            <ResultFound
-              results={totalResults}
-              currentPage={currentPage}
-              totalPage={totalPage}
-            />
+            <div ref={this.foundResult}>
+              <ResultFound
+                results={totalResults}
+                currentPage={currentPage}
+                totalPage={totalPage}
+              />
+            </div>
             {this.state.isLoading ? (
               <Loading />
             ) : (
@@ -152,6 +160,12 @@ class App extends React.Component {
                   handlePageChange={this.handlePageChange}
                   gotoPage={this.gotoPage}
                 />
+                <button
+                  onClick={this.goToTop}
+                  className="btn btn-secondary my-4 float-right"
+                >
+                  Go To Top
+                </button>
               </div>
             )}
           </div>
