@@ -8,8 +8,6 @@ class Header extends React.Component {
     searchTerm: "",
   };
 
-  searchRef = React.createRef();
-
   handleChange = (e) => {
     this.setState({ searchTerm: e.target.value });
   };
@@ -19,10 +17,6 @@ class Header extends React.Component {
       this.props.search(this.state.searchTerm);
     }
   };
-
-  componentDidMount() {
-    this.searchRef.current.focus();
-  }
 
   render() {
     const { category, changeCategory } = this.props;
@@ -42,7 +36,7 @@ class Header extends React.Component {
           </p>
         </div>
         <input
-          ref={this.searchRef}
+          ref={this.props.innerRef}
           type="search"
           className="form-control"
           placeholder="Type Anything & Press Enter To Search"
@@ -73,4 +67,5 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default React.forwardRef((props,ref) => (<Header {...props} innerRef={ref} />));
+

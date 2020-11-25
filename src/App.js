@@ -15,7 +15,9 @@ class App extends React.Component {
     isLoading: true,
   };
 
+  // Ref
   foundResult = React.createRef();
+  searchRef = React.createRef();
 
   componentDidMount() {
     news
@@ -28,6 +30,8 @@ class App extends React.Component {
         alert("Something went wrong");
         this.setState({ isLoading: false });
       });
+
+    this.searchRef.current.focus();
   }
 
   goToTop = () => {
@@ -137,6 +141,7 @@ class App extends React.Component {
               category={category}
               changeCategory={this.changeCategory}
               search={this.search}
+              ref={this.searchRef}
             />
             <ResultFound
               ref={this.foundResult}
