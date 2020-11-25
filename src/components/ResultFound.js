@@ -1,5 +1,6 @@
 import React from "react";
 
+
 function ResultFound({results, currentPage, totalPage}) {
   return (
     <div className="d-flex">

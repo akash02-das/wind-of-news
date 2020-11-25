@@ -85,31 +85,33 @@ class App extends React.Component {
       });
   };
 
-  changeCategory = category => {
-    this.setState({isLoading: true});
-    news.changeCategory(category)
-    .then((data) => {
-      this.setState({ data, isLoading: false });
-    })
-    .catch((e) => {
-      console.log(e);
-      alert("Something went wrong");
-      this.setState({ isLoading: false });
-    });
-  }
+  changeCategory = (category) => {
+    this.setState({ isLoading: true });
+    news
+      .changeCategory(category)
+      .then((data) => {
+        this.setState({ data, isLoading: false });
+      })
+      .catch((e) => {
+        console.log(e);
+        alert("Something went wrong");
+        this.setState({ isLoading: false });
+      });
+  };
 
-  search = searchTerm => {
-    this.setState({isLoading: true});
-    news.search(searchTerm)
-    .then((data) => {
-      this.setState({ data, isLoading: false });
-    })
-    .catch((e) => {
-      console.log(e);
-      alert("Something went wrong");
-      this.setState({ isLoading: false });
-    });
-  }
+  search = (searchTerm) => {
+    this.setState({ isLoading: true });
+    news
+      .search(searchTerm)
+      .then((data) => {
+        this.setState({ data, isLoading: false });
+      })
+      .catch((e) => {
+        console.log(e);
+        alert("Something went wrong");
+        this.setState({ isLoading: false });
+      });
+  };
 
   render() {
     const {
@@ -130,10 +132,10 @@ class App extends React.Component {
               changeCategory={this.changeCategory}
               search={this.search}
             />
-            <ResultFound 
-              results={totalResults} 
-              currentPage={currentPage} 
-              totalPage={totalPage} 
+            <ResultFound
+              results={totalResults}
+              currentPage={currentPage}
+              totalPage={totalPage}
             />
             {this.state.isLoading ? (
               <Loading />
